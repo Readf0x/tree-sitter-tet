@@ -61,6 +61,9 @@ module.exports = grammar({
 
     code_function: $ => seq(":", /\w/),
 
-    raw_text: $ => token(/([^|]|\|[^>])*/)
+    raw_text: $ => seq(
+      /[^:]/,
+      token(/([^|]|\|[^>])*/)
+    )
   }
 });

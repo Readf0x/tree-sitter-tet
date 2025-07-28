@@ -71,6 +71,11 @@
     "fields": {}
   },
   {
+    "type": "raw_text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -112,10 +117,6 @@
   },
   {
     "type": "code_open",
-    "named": true
-  },
-  {
-    "type": "raw_text",
     "named": true
   },
   {

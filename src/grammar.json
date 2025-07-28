@@ -204,11 +204,20 @@
       ]
     },
     "raw_text": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "([^|]|\\|[^>])*"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^:]"
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "([^|]|\\|[^>])*"
+          }
+        }
+      ]
     }
   },
   "extras": [
