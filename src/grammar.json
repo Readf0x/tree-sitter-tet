@@ -1,0 +1,226 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "tet",
+  "rules": {
+    "source_file": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "import_directive"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\n"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "content"
+        }
+      ]
+    },
+    "content": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^!]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "![^!]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!![^i]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!i[^m]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!im[^p]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!imp[^o]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!impo[^r]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!impor[^t]"
+            },
+            {
+              "type": "PATTERN",
+              "value": "!!import[^:]"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "code"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "import_directive": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "!!import:"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "quoted_module"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": " "
+              },
+              {
+                "type": "SYMBOL",
+                "name": "quoted_module"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "quoted_module": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\"]+"
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        }
+      ]
+    },
+    "text": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "([^<]|<[^|])+"
+      }
+    },
+    "code": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "code_open"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "code_function"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "raw_text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code_close"
+        }
+      ]
+    },
+    "code_open": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "<|"
+      }
+    },
+    "code_close": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": "|>"
+      }
+    },
+    "code_function": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\w"
+        }
+      ]
+    },
+    "raw_text": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "([^|]|\\|[^>])*"
+      }
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}

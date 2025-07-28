@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "generate": "tree-sitter generate",
-    "test": "tree-sitter parse index.html.tet"
+    "test": "tree-sitter generate && tree-sitter parse index.html.tet"
   },
   "author": "readf0x",
   "license": "GPL-3.0-only"

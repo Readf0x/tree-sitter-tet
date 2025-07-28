@@ -16,8 +16,15 @@
             nodejs_latest
           ];
         };
-        # packages = rec {
-        # };
+        packages = rec {
+          tree-sitter-tet = pkgs.tree-sitter.buildGrammar {
+            language = "tet";
+            version = "0.1.0";
+            src = ./.;
+            meta.homepage = "https://github.com/readf0x/tree-sitter-tet";
+          };
+          default = tree-sitter-tet;
+        };
       };
     };
 }

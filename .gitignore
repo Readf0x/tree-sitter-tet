@@ -36,6 +36,9 @@ dist/
 zig-cache/
 zig-out/
 
+# Nix artifacts
+/result
+
 # Example dirs
 /examples/*/
 
