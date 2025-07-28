@@ -1,1 +1,15 @@
-../../index.html.tet
+!!import:"strings"
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <| posts := []string{ "Foo", "Bar", "Baz" } |>
+        <ul>
+            <| for _, post := range posts { |>
+                <li><|:w strings.ToUpper(post) |></li>
+            <| } |>
+        </ul>
+    </body>
+</html>
